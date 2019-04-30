@@ -1,9 +1,24 @@
 <template>
   <div>
-    <v-layout align-center justify-center row fill-height><img src="./assets/logo.svg" alt="pokémon"/></v-layout>
-    <v-layout align-start justify-space-around row fill-height>
-      <pokemon-list/>
-      <summary-favorites/>
+    <v-layout
+      align-center
+      justify-center
+      row
+      fill-height
+    >
+      <img
+        src="./assets/logo.svg"
+        alt="pokémon"
+      >
+    </v-layout>
+    <v-layout
+      align-start
+      justify-space-around
+      row
+      fill-height
+    >
+      <pokemon-list />
+      <summary-favorites />
     </v-layout>
   </div>
 </template>

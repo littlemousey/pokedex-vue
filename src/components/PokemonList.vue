@@ -1,18 +1,41 @@
 <template>
-    <div class="pokemon-list">
-        <h1>Choose your Pokémon</h1>
-        <template v-for="(pokemon, index) in pokemonData">
-            <p class="pokemon-list-item" v-bind:key="pokemon.url">
-                {{ index + 1 + '. '}}
-                <i v-if="favoritePokemonNames.includes(pokemon.name)" class="nes-icon is-small heart"></i>
-                <i v-else class="nes-icon is-small heart is-empty"></i>
-                {{ pokemon.name}}
-            <img v-bind:key="pokemon.url" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`" alt="Pokemon`"/>
-            <a v-show="!favoritePokemonNames.includes(pokemon.name)" class="nes-btn" v-on:click="setFavorites(pokemon.name), playPokemonCry(index+1)">Pick me!</a>
-            <button v-show="favoritePokemonNames.includes(pokemon.name)" class="nes-btn is-error" v-on:click="setFavorites(pokemon.name), playPokemonCry(index+1)">Remove</button>
-            </p>
-        </template>
-    </div>
+  <div class="pokemon-list">
+    <h1>Choose your Pokémon</h1>
+    <template v-for="(pokemon, index) in pokemonData">
+      <p
+        :key="pokemon.url"
+        class="pokemon-list-item"
+      >
+        {{ index + 1 + '. ' }}
+        <i
+          v-if="favoritePokemonNames.includes(pokemon.name)"
+          class="nes-icon is-small heart"
+        />
+        <i
+          v-else
+          class="nes-icon is-small heart is-empty"
+        />
+        {{ pokemon.name }}
+        <img
+          :key="pokemon.url"
+          :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`"
+          alt="Pokemon`"
+        >
+        <a
+          v-show="!favoritePokemonNames.includes(pokemon.name)"
+          class="nes-btn"
+          @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
+        >Pick me!</a>
+        <button
+          v-show="favoritePokemonNames.includes(pokemon.name)"
+          class="nes-btn is-error"
+          @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
+        >
+          Remove
+        </button>
+      </p>
+    </template>
+  </div>
 </template>
 
 <script>
