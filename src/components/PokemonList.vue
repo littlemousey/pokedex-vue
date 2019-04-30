@@ -2,25 +2,14 @@
     <div class="pokemon-list">
         <h1>Choose your Pokémon</h1>
         <template v-for="(pokemon, index) in pokemonData">
-            <p v-on:click="setFavorites(pokemon.name), playPokemonCry(index+1)" class="pokemon-list-item" v-bind:key="pokemon.url">{{ index + 1 + '. '}} {{ pokemon.name}}
+            <p class="pokemon-list-item" v-bind:key="pokemon.url">
+                {{ index + 1 + '. '}}
+                <i v-if="favoritePokemonNames.includes(pokemon.name)" class="nes-icon is-small heart"></i>
+                <i v-else class="nes-icon is-small heart is-empty"></i>
+                {{ pokemon.name}}
             <img v-bind:key="pokemon.url" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`" alt="Pokemon`"/>
-
-    <v-badge
-        v-if="favoritePokemonNames.includes(pokemon.name)"
-      color="red"
-      right
-      overlap
-    >
-    <template v-slot:badge>
-        <v-icon
-          dark
-          small
-        >
-          favorite
-        </v-icon>
-      </template>
-            </v-badge>
-
+            <a v-show="!favoritePokemonNames.includes(pokemon.name)" class="nes-btn" v-on:click="setFavorites(pokemon.name), playPokemonCry(index+1)">Pick me!</a>
+            <button v-show="favoritePokemonNames.includes(pokemon.name)" class="nes-btn is-error" v-on:click="setFavorites(pokemon.name), playPokemonCry(index+1)">Remove</button>
             </p>
         </template>
     </div>

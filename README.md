@@ -1,5 +1,10 @@
 # pokedex-vue
 
+This project is made with Vue CLI and the following libaries and API:
+- [NES.CSS](https://nostalgic-css.github.io/NES.css/)
+- [Vuex](https://vuex.vuejs.org/)
+- [PokéAPI](https://pokeapi.co/)
+
 ## Project setup
 ```
 npm install
