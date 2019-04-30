@@ -66,8 +66,12 @@ import { mapState, mapActions } from 'vuex'
 
           },
           pickRandomPokemon() {
-            const number = Math.floor(Math.random() * Math.floor(151));
-            this.addFavorite(this.statePokemonDataList[number].name)
+            const list = this.statePokemonDataList.filter(function(pokemon){
+              return !this.favoritePokemonList.includes(pokemon.name)
+            }, this)
+            
+            const number = Math.floor(Math.random() * Math.floor(list.length));
+            this.addFavorite(list[number].name)
           },
           ...mapActions([
               'addFavorite'
