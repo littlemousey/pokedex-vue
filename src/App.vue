@@ -11,6 +11,9 @@
 <script>
 import PokemonList from './components/PokemonList'
 import OverviewFavorites from './components/OverviewFavorites'
+import { mapActions } from 'vuex'
+
+const LOCAL_STORAGE_PKM_NAMES = 'favoritePokemonNames'
 
 export default {
   name: 'App',
@@ -18,10 +21,20 @@ export default {
     PokemonList,
     OverviewFavorites
   },
-  data () {
-    return {
-      //
-    }
+  methods: {
+    getDataFromLocalStorage() {
+      const localStoragePkmNames = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_PKM_NAMES))
+
+      if (localStoragePkmNames) {
+        this.setFavoritePokemonList(localStoragePkmNames)
+      }
+    },
+    ...mapActions([
+        'setFavoritePokemonList'
+    ])
+  },
+  created() {
+    this.getDataFromLocalStorage()
   }
 }
 </script>

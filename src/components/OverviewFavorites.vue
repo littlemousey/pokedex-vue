@@ -1,12 +1,15 @@
 <template>
     <div>
         <h2>Your chosen favorite Pokémon</h2>
-        <ul class="chosen-pokemon-list">
-            <li v-for="(pokemonName, index) in favoritePokemonNames" v-bind:key="index">
+        <p v-if="favoriteListLength < 10">I can't choose, help me <v-btn>Pick Pokémon</v-btn></p>
+        <template>
+            <p v-for="(pokemonName, index) in favoritePokemonNames" v-bind:key="index" class="chosen-pokemon">
+                <img src="../assets/pokeball.png" alt="pokeball"/>
                 {{ pokemonName }}
-            </li>
-        </ul>
-        <v-btn>View your favorite Pokémon</v-btn>
+            </p>
+        </template>
+        <v-btn v-if="favoriteListLength > 0">View your favorite Pokémon</v-btn>
+        <p v-if="favoriteListLength > 9">Your list is full!</p>
     </div>
 </template>
 
@@ -21,17 +24,21 @@ import { mapState } from 'vuex'
             }
         },
         mounted() {
-            this.favoritePokemonNames = this.listFavoritePokemonNames
+            this.favoritePokemonNames = this.listFavoritePokemon
         },
-        computed: mapState([
-            'listFavoritePokemonNames'
-        ])
-        
+        computed: {
+            ...mapState([
+            'listFavoritePokemon'
+            ]),
+            favoriteListLength() {
+                return this.listFavoritePokemon.length
+            }
+        }
     }
 </script>
 
 <style scoped>
-.chosen-pokemon-list {
+.chosen-pokemon {
     text-transform: capitalize;
 }
 </style>

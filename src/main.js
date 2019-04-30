@@ -5,12 +5,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const LOCAL_STORAGE_PKM_NAMES = 'favoritePokemonNames'
+
 const store = new Vuex.Store({
   state: {
-    listFavoritePokemonNo: [],
-    listFavoritePokemonNames: []
+    listFavoritePokemon: []
   },
   actions: {
+    setFavoritePokemonList (context, payload) {
+      context.commit('setFavoritePokemonList', payload)
+    },
     addFavorite (context, payload) {
       context.commit('addFavorite', payload)
     },
@@ -20,14 +24,17 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-      addFavorite (state, {number, name}) {
-        state.listFavoritePokemonNo.push(number)
-        state.listFavoritePokemonNames.push(name)
-      },
-      deleteFavorite (state, item) {
-        state.listFavoritePokemonNo.splice(item, 1)
-        state.listFavoritePokemonNames.splice(item, 1)
-      }
+    setFavoritePokemonList (state, list) {
+      state.listFavoritePokemon = list
+    },
+    addFavorite (state, name) {
+      state.listFavoritePokemon.push(name)
+      window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.listFavoritePokemon))
+    },
+    deleteFavorite (state, item) {
+      state.listFavoritePokemon.splice(item, 1)
+      window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.listFavoritePokemon))
+    }
   }
 });
 

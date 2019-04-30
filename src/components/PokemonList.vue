@@ -2,11 +2,11 @@
     <div class="pokemon-list">
         <h1>Choose your Pokémon</h1>
         <template v-for="(pokemon, index) in pokemonData">
-            <p v-on:click="setFavorites(index, pokemon.name), playPokemonCry(index+1)" class="pokemon-list-item" v-bind:key="pokemon.url">{{ index + 1 + '. '}} {{ pokemon.name}}
+            <p v-on:click="setFavorites(pokemon.name), playPokemonCry(index+1)" class="pokemon-list-item" v-bind:key="pokemon.url">{{ index + 1 + '. '}} {{ pokemon.name}}
             <img v-bind:key="pokemon.url" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`" alt="Pokemon`"/>
 
     <v-badge
-        v-if="listLikedPokemon.includes(index)"
+        v-if="favoritePokemonNames.includes(pokemon.name)"
       color="red"
       right
       overlap
@@ -34,14 +34,12 @@ import { mapState, mapActions } from 'vuex'
         data: function() {
             return {
                 pokemonData: null,
-                listLikedPokemon: [],
                 favoritePokemonNames: []
                 
             }
         },
         mounted() {
-            this.listLikedPokemon = this.listFavoritePokemonNo
-            this.favoritePokemonNames = this.listFavoritePokemonNames
+            this.favoritePokemonNames = this.listFavoritePokemon
         },
         async created() {
             const data = await this.getPokemonData()
@@ -53,14 +51,14 @@ import { mapState, mapActions } from 'vuex'
                 const json = await data.json()
                 return json.results
             },
-            setFavorites(number, name) {
-                if (this.listLikedPokemon.includes(number)) {
-                    const indexInArray = this.listLikedPokemon.indexOf(number)
+            setFavorites(name) {
+                if (this.favoritePokemonNames.includes(name)) {
+                    const indexInArray = this.favoritePokemonNames.indexOf(name)
                     this.deleteFavorite(indexInArray)
                     return
                 }
-                if (this.listLikedPokemon.length < 10) {
-                    this.addFavorite({number, name})
+                if (this.favoritePokemonNames.length < 10) {
+                    this.addFavorite(name)
                 }
             },
             playPokemonCry(pokemonId) {
@@ -72,8 +70,7 @@ import { mapState, mapActions } from 'vuex'
             ])
         },
         computed: mapState([
-            'listFavoritePokemonNo',
-            'listFavoritePokemonNames'
+            'listFavoritePokemon'
         ])
     }
 </script>
