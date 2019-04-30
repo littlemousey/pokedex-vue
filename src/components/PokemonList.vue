@@ -1,8 +1,8 @@
 <template>
   <div class="pokemon-list">
     <h1>Choose your Pokémon</h1>
-    <template v-for="(pokemon, index) in pokemonData">
       <p
+      v-for="(pokemon, index) in pokemonData"
         :key="pokemon.url"
         class="pokemon-list-item"
       >
@@ -34,7 +34,6 @@
           Remove
         </button>
       </p>
-    </template>
   </div>
 </template>
 
