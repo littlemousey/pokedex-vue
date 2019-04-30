@@ -8,7 +8,7 @@
       >
         {{ index + 1 + '. ' }}
         <i
-          v-if="favoritePokemonSelected.includes(pokemon.name)"
+          v-if="stateFavoritePokemonList.includes(pokemon.name)"
           class="nes-icon is-small heart"
         />
         <i
@@ -22,12 +22,12 @@
           alt="Pokemon`"
         >
         <a
-          v-show="!favoritePokemonSelected.includes(pokemon.name)"
+          v-show="!stateFavoritePokemonList.includes(pokemon.name)"
           class="nes-btn" :class="{'is-disabled': favoriteListLength === 10}"
           @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
         >Pick me!</a>
         <button
-          v-show="favoritePokemonSelected.includes(pokemon.name)"
+          v-show="stateFavoritePokemonList.includes(pokemon.name)"
           class="nes-btn is-error"
           @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
         >
@@ -45,7 +45,6 @@ import { mapState, mapActions } from 'vuex'
         data: function() {
             return {
               pokemonData: null,
-              favoritePokemonSelected: []
                 
             }
         },
@@ -54,17 +53,16 @@ import { mapState, mapActions } from 'vuex'
             'stateFavoritePokemonList', 'statePokemonDataList'
         ]),
           favoriteListLength() {
-              return this.favoritePokemonSelected.length
+              return this.stateFavoritePokemonList.length
           }
         },
         mounted() {
           this.pokemonData = this.statePokemonDataList
-          this.favoritePokemonSelected = this.stateFavoritePokemonList
         },
         methods: {
             setFavorites(name) {
-                if (this.favoritePokemonSelected.includes(name)) {
-                    const indexInArray = this.favoritePokemonSelected.indexOf(name)
+                if (this.stateFavoritePokemonList.includes(name)) {
+                    const indexInArray = this.stateFavoritePokemonList.indexOf(name)
                     this.deleteFavorite(indexInArray)
                     return
                 }

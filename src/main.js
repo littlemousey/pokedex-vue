@@ -22,9 +22,11 @@ const store = new Vuex.Store({
     addFavorite (context, payload) {
       context.commit('addFavorite', payload)
     },
-
     deleteFavorite (context, payload) {
       context.commit('deleteFavorite', payload)
+    },
+    eraseFavoritePokemonList (context) {
+      context.commit('eraseFavoritePokemonList')
     }
   },
   mutations: {
@@ -40,6 +42,10 @@ const store = new Vuex.Store({
     },
     deleteFavorite (state, item) {
       state.stateFavoritePokemonList.splice(item, 1)
+      window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.stateFavoritePokemonList))
+    },
+    eraseFavoritePokemonList (state) {
+      state.stateFavoritePokemonList = []
       window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.stateFavoritePokemonList))
     }
   }

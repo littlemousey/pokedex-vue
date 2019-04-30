@@ -2,11 +2,11 @@
   <div>
     <h2>Your chosen favorite Pokémon</h2>
     <p v-if="favoriteListLength < maximumList">
-      I can't choose, help me <a @click="startInterval" class="nes-btn">Pick Pokémon</a>
+      I can't choose, help me <button @click="startInterval" class="nes-btn is-success">Pick Pokémon</button>
     </p>
     <template>
       <p
-        v-for="(pokemonName, index) in favoritePokemonList"
+        v-for="(pokemonName, index) in stateFavoritePokemonList"
         :key="index"
         class="chosen-pokemon"
       >
@@ -23,6 +23,9 @@
     <p v-if="favoriteListLength > 9">
       Your list is full!
     </p>
+    <p v-if="favoriteListLength > 9">
+      Do you want to <button @click="emptyFavoritePokemonList" class="nes-btn is-error">Delete</button> the list?
+    </p>
     <a
       v-if="favoriteListLength > 0"
       class="nes-btn"
@@ -37,7 +40,6 @@ import { mapState, mapActions } from 'vuex'
         name: 'SummaryFavorites',
         data: function() {
             return {
-                favoritePokemonList: [],
                 maximumList: 10
             }
         },
@@ -46,11 +48,8 @@ import { mapState, mapActions } from 'vuex'
             'stateFavoritePokemonList', 'statePokemonDataList'
             ]),
             favoriteListLength() {
-                return this.favoritePokemonList.length
+                return this.stateFavoritePokemonList.length
             }
-        },
-        mounted() {
-          this.favoritePokemonList = this.stateFavoritePokemonList
         },
         methods: {
           startInterval() {
@@ -67,14 +66,17 @@ import { mapState, mapActions } from 'vuex'
           },
           pickRandomPokemon() {
             const list = this.statePokemonDataList.filter(function(pokemon){
-              return !this.favoritePokemonList.includes(pokemon.name)
+              return !this.stateFavoritePokemonList.includes(pokemon.name)
             }, this)
             
             const number = Math.floor(Math.random() * Math.floor(list.length));
             this.addFavorite(list[number].name)
           },
+          emptyFavoritePokemonList() {
+            this.eraseFavoritePokemonList()
+          },
           ...mapActions([
-              'addFavorite'
+              'addFavorite', 'eraseFavoritePokemonList'
           ])
         }
     }
