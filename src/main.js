@@ -9,9 +9,13 @@ const LOCAL_STORAGE_PKM_NAMES = 'favoritePokemonNames'
 
 const store = new Vuex.Store({
   state: {
-    listFavoritePokemon: []
+    statePokemonDataList: [],
+    stateFavoritePokemonList: []
   },
   actions: {
+    setPokemonData (context, payload){
+      context.commit('setPokemonData', payload)
+    },
     setFavoritePokemonList (context, payload) {
       context.commit('setFavoritePokemonList', payload)
     },
@@ -24,16 +28,19 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    setPokemonData (state, list) {
+      state.statePokemonDataList = list
+    },
     setFavoritePokemonList (state, list) {
-      state.listFavoritePokemon = list
+      state.stateFavoritePokemonList = list
     },
     addFavorite (state, name) {
-      state.listFavoritePokemon.push(name)
-      window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.listFavoritePokemon))
+      state.stateFavoritePokemonList.push(name)
+      window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.stateFavoritePokemonList))
     },
     deleteFavorite (state, item) {
-      state.listFavoritePokemon.splice(item, 1)
-      window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.listFavoritePokemon))
+      state.stateFavoritePokemonList.splice(item, 1)
+      window.localStorage.setItem(LOCAL_STORAGE_PKM_NAMES, JSON.stringify(state.stateFavoritePokemonList))
     }
   }
 });

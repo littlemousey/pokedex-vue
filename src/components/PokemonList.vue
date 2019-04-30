@@ -8,7 +8,7 @@
       >
         {{ index + 1 + '. ' }}
         <i
-          v-if="favoritePokemonNames.includes(pokemon.name)"
+          v-if="favoritePokemonSelected.includes(pokemon.name)"
           class="nes-icon is-small heart"
         />
         <i
@@ -22,12 +22,12 @@
           alt="Pokemon`"
         >
         <a
-          v-show="!favoritePokemonNames.includes(pokemon.name)"
-          class="nes-btn"
+          v-show="!favoritePokemonSelected.includes(pokemon.name)"
+          class="nes-btn" :class="{'is-disabled': favoriteListLength === 10}"
           @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
         >Pick me!</a>
         <button
-          v-show="favoritePokemonNames.includes(pokemon.name)"
+          v-show="favoritePokemonSelected.includes(pokemon.name)"
           class="nes-btn is-error"
           @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
         >
@@ -45,31 +45,31 @@ import { mapState, mapActions } from 'vuex'
         name: 'PokemonList',
         data: function() {
             return {
-                pokemonData: null,
-                favoritePokemonNames: []
+              pokemonData: null,
+              favoritePokemonSelected: []
                 
             }
         },
-        mounted() {
-            this.favoritePokemonNames = this.listFavoritePokemon
+        computed: {
+        ...mapState([
+            'stateFavoritePokemonList', 'statePokemonDataList'
+        ]),
+          favoriteListLength() {
+              return this.favoritePokemonSelected.length
+          }
         },
-        async created() {
-            const data = await this.getPokemonData()
-            this.pokemonData = data
+        mounted() {
+          this.pokemonData = this.statePokemonDataList
+          this.favoritePokemonSelected = this.stateFavoritePokemonList
         },
         methods: {
-            async getPokemonData() {
-                const data = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-                const json = await data.json()
-                return json.results
-            },
             setFavorites(name) {
-                if (this.favoritePokemonNames.includes(name)) {
-                    const indexInArray = this.favoritePokemonNames.indexOf(name)
+                if (this.favoritePokemonSelected.includes(name)) {
+                    const indexInArray = this.favoritePokemonSelected.indexOf(name)
                     this.deleteFavorite(indexInArray)
                     return
                 }
-                if (this.favoritePokemonNames.length < 10) {
+                if (this.favoriteListLength < 10) {
                     this.addFavorite(name)
                 }
             },
@@ -80,10 +80,7 @@ import { mapState, mapActions } from 'vuex'
             ...mapActions([
                 'addFavorite', 'deleteFavorite'
             ])
-        },
-        computed: mapState([
-            'listFavoritePokemon'
-        ])
+        }
     }
 </script>
 

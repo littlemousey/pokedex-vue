@@ -17,8 +17,8 @@
       row
       fill-height
     >
-      <pokemon-list />
-      <summary-favorites />
+      <pokemon-list v-if="pokemonData" />
+      <summary-favorites v-if="pokemonData" />
     </v-layout>
   </div>
 </template>
@@ -36,6 +36,19 @@ export default {
     PokemonList,
     SummaryFavorites
   },
+  data: function() {
+    return {
+      pokemonData: null
+    }
+  },
+  async created() {
+    this.pokemonData = await this.getPokemonData()
+    this.setPokemonData(this.pokemonData)
+  },
+  mounted() {
+    this.getDataFromLocalStorage()
+
+  },
   methods: {
     getDataFromLocalStorage() {
       const localStoragePkmNames = JSON.parse(window.localStorage.getItem(LOCAL_STORAGE_PKM_NAMES))
@@ -44,12 +57,14 @@ export default {
         this.setFavoritePokemonList(localStoragePkmNames)
       }
     },
+    async getPokemonData() {
+        const data = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+        const json = await data.json()
+        return json.results
+    },
     ...mapActions([
-        'setFavoritePokemonList'
+        'setFavoritePokemonList', 'setPokemonData'
     ])
-  },
-  created() {
-    this.getDataFromLocalStorage()
   }
 }
 </script>
