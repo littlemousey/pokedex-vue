@@ -81,7 +81,7 @@ import { mapState, mapActions } from 'vuex'
     }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .pokemon-list {
     text-transform: capitalize;
 }

@@ -2,8 +2,22 @@ import Vue from 'vue'
 import './plugins/vuetify'
 import App from './App.vue'
 import Vuex from 'vuex'
+import VueRouter from 'vue-router'
+import OverviewFavoritePokemon from './pages/overviewFavoritePokemon'
+import SelectPokemon from './pages/selectPokemon'
 
 Vue.use(Vuex)
+Vue.use(VueRouter)
+
+const routes = [
+  { path: '/select', component: SelectPokemon},
+  { path: '/overview', component: OverviewFavoritePokemon}
+]
+
+const router = new VueRouter({
+  routes // short for `routes: routes`
+})
+
 
 const LOCAL_STORAGE_PKM_NAMES = 'favoritePokemonNames'
 
@@ -56,4 +70,5 @@ Vue.config.productionTip = false
 new Vue({
   render: h => h(App),
   store,
+  router,
 }).$mount('#app')

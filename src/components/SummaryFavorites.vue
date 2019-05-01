@@ -26,10 +26,7 @@
     <p v-if="favoriteListLength > 9">
       Do you want to <button @click="emptyFavoritePokemonList" class="nes-btn is-error">Delete</button> the list?
     </p>
-    <a
-      v-if="favoriteListLength > 0"
-      class="nes-btn"
-    >View your favorite Pokémon</a>
+    <router-link v-if="favoriteListLength > 0" class="nes-btn" to="/overview">View your favorite Pokémon</router-link>
   </div>
 </template>
 
