@@ -5,28 +5,43 @@ import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import OverviewFavoritePokemon from './pages/overviewFavoritePokemon'
 import SelectPokemon from './pages/selectPokemon'
+import Login from './pages/login'
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/select', component: SelectPokemon},
-  { path: '/overview', component: OverviewFavoritePokemon}
+  { path: '/overview', component: OverviewFavoritePokemon},
+  { path: '/login', component: Login }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes // short for `routes: routes`
 })
 
+router.beforeEach((to, from, next) => {
+  if (!store.state.loggedIn && to.path !== '/login') {
+    next('/login');
+  } else {
+    next();
+  }
+})
 
 const LOCAL_STORAGE_PKM_NAMES = 'favoritePokemonNames'
+const LOCAL_STORAGE_USER = 'userLoggedIn'
 
 const store = new Vuex.Store({
   state: {
     statePokemonDataList: [],
-    stateFavoritePokemonList: []
+    stateFavoritePokemonList: [],
+    loggedIn: false
   },
   actions: {
+    setUserLoggedIn (context) {
+      context.commit('setUserLoggedIn')
+    },
     setPokemonData (context, payload){
       context.commit('setPokemonData', payload)
     },
@@ -44,6 +59,10 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    setUserLoggedIn (state) {
+      state.loggedIn = true
+      window.localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(state.loggedIn))
+    },
     setPokemonData (state, list) {
       state.statePokemonDataList = list
     },

@@ -1,39 +1,40 @@
 <template>
   <div class="pokemon-list">
     <h1>Choose your Pokémon</h1>
-      <p
-      v-for="(pokemon, index) in pokemonData"
+    <p
+      v-for="(pokemon, index) in statePokemonDataList"
+      :key="pokemon.url"
+      class="pokemon-list-item"
+    >
+      {{ index + 1 + '. ' }}
+      <i
+        v-if="stateFavoritePokemonList.includes(pokemon.name)"
+        class="nes-icon is-small heart"
+      />
+      <i
+        v-else
+        class="nes-icon is-small heart is-empty"
+      />
+      {{ pokemon.name }}
+      <img
         :key="pokemon.url"
-        class="pokemon-list-item"
+        :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`"
+        alt="Pokemon`"
       >
-        {{ index + 1 + '. ' }}
-        <i
-          v-if="stateFavoritePokemonList.includes(pokemon.name)"
-          class="nes-icon is-small heart"
-        />
-        <i
-          v-else
-          class="nes-icon is-small heart is-empty"
-        />
-        {{ pokemon.name }}
-        <img
-          :key="pokemon.url"
-          :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`"
-          alt="Pokemon`"
-        >
-        <a
-          v-show="!stateFavoritePokemonList.includes(pokemon.name)"
-          class="nes-btn" :class="{'is-disabled': favoriteListLength === 10}"
-          @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
-        >Pick me!</a>
-        <button
-          v-show="stateFavoritePokemonList.includes(pokemon.name)"
-          class="nes-btn is-error"
-          @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
-        >
-          Remove
-        </button>
-      </p>
+      <a
+        v-show="!stateFavoritePokemonList.includes(pokemon.name)"
+        class="nes-btn"
+        :class="{'is-disabled': favoriteListLength === 10}"
+        @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
+      >Pick me!</a>
+      <button
+        v-show="stateFavoritePokemonList.includes(pokemon.name)"
+        class="nes-btn is-error"
+        @click="setFavorites(pokemon.name), playPokemonCry(index+1)"
+      >
+        Remove
+      </button>
+    </p>
   </div>
 </template>
 
@@ -42,12 +43,6 @@ import { mapState, mapActions } from 'vuex'
 
     export default {
         name: 'PokemonList',
-        data: function() {
-            return {
-              pokemonData: null,
-                
-            }
-        },
         computed: {
         ...mapState([
             'stateFavoritePokemonList', 'statePokemonDataList'
@@ -55,9 +50,6 @@ import { mapState, mapActions } from 'vuex'
           favoriteListLength() {
               return this.stateFavoritePokemonList.length
           }
-        },
-        mounted() {
-          this.pokemonData = this.statePokemonDataList
         },
         methods: {
             setFavorites(name) {

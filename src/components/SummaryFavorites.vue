@@ -2,7 +2,12 @@
   <div>
     <h2>Your chosen favorite Pokémon</h2>
     <p v-if="favoriteListLength < maximumList">
-      I can't choose, help me <button @click="startInterval" class="nes-btn is-success">Pick Pokémon</button>
+      I can't choose, help me <button
+        class="nes-btn is-success"
+        @click="startInterval"
+      >
+        Pick Pokémon
+      </button>
     </p>
     <template>
       <p
@@ -24,9 +29,20 @@
       Your list is full!
     </p>
     <p v-if="favoriteListLength > 9">
-      Do you want to <button @click="emptyFavoritePokemonList" class="nes-btn is-error">Delete</button> the list?
+      Do you want to <button
+        class="nes-btn is-error"
+        @click="emptyFavoritePokemonList"
+      >
+        Delete
+      </button> the list?
     </p>
-    <router-link v-if="favoriteListLength > 0" class="nes-btn" to="/overview">View your favorite Pokémon</router-link>
+    <router-link
+      v-if="favoriteListLength > 0"
+      class="nes-btn"
+      to="/overview"
+    >
+      View your favorite Pokémon
+    </router-link>
   </div>
 </template>
 
