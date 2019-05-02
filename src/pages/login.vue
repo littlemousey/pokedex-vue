@@ -15,6 +15,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { validatePassword } from '@/utils/validatePassword'
 
     export default {
       data: function() {
@@ -26,7 +27,7 @@ import { mapActions } from 'vuex';
       },
       methods: {
         checkPassword() {
-          this.passwordCorrect = this.validatePassword(this.password)
+          this.passwordCorrect = validatePassword(this.password)
           if (this.passwordCorrect) {
             this.setUserLoggedIn()
             this.$router.push('select')
@@ -34,17 +35,10 @@ import { mapActions } from 'vuex';
           }
           return
         },
-        validatePassword(password) {
-        if (password === 'master') {
-          return true
-        } else {
-          return false
-        }
-      },
-      ...mapActions([
-          'setUserLoggedIn'
-      ])
-      },
+        ...mapActions([
+            'setUserLoggedIn'
+        ])
+      }
     }
 </script>
 
