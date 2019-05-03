@@ -10,38 +10,41 @@
       <input id="password_field" v-model="password" type="password" class="nes-input">
     </div>
     <a class="nes-btn" @click="checkPassword">Continue</a>
+    <p v-if="showPasswordError" class="nes-text is-error">Oops, that was a wrong password. Try again</p>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { validatePassword } from "@/utils/validatePassword";
+import { mapActions } from 'vuex'
+import { validatePassword } from '@/utils/validatePassword'
 
 export default {
-  data: function() {
-    return {
-      username: "",
-      password: "",
-      passwordCorrect: false
-    };
-  },
-  methods: {
-    checkPassword() {
-      this.passwordCorrect = validatePassword(this.password);
-      if (this.passwordCorrect) {
-        this.setUserLoggedIn();
-        this.$router.push("select");
-      }
-      return;
+    data: function() {
+        return {
+            username: '',
+            password: '',
+            passwordCorrect: false,
+            showPasswordError: false,
+        }
     },
-    ...mapActions(["setUserLoggedIn"])
-  }
-};
+    methods: {
+        checkPassword() {
+            this.passwordCorrect = validatePassword(this.password)
+            if (this.passwordCorrect) {
+                this.setUserLoggedIn()
+                this.$router.push('select')
+            } else {
+                this.showPasswordError = true
+            }
+        },
+        ...mapActions(['setUserLoggedIn']),
+    },
+}
 </script>
 
 <style scoped>
 .login-screen__form {
-  width: 500px;
-  margin: 300px auto;
+    width: 500px;
+    margin: 300px auto;
 }
 </style>
