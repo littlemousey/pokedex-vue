@@ -11,7 +11,7 @@ let rightPassword, wrongPassword, masterPassword
 
 beforeEach(() => {
     rightPassword = 'aabcppfsdlj'
-    wrongPassword = 'jdfnkjiiasldnflsaFnkOdfl__asdk233!'
+    wrongPassword = 'jdfnkjiiasldnflsaFnkOdfl_asdk233!'
     masterPassword = 'pokemonmaster'
 })
 

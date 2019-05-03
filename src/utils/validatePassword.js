@@ -21,6 +21,7 @@ export function validatePassword(password) {
 }
 
 export function checksOnConsecutiveLetters(password) {
+    password = password.replace(/[0-9]/g, '') // strip numbers from string
     let previousCharCode = null
     let currentCharCode = null
     let counterForConsecutiveLetters = 0
@@ -44,6 +45,7 @@ export function checksOnConsecutiveLetters(password) {
 }
 
 export function checksOnPairsOfLetters(password) {
+    password = password.replace(/[0-9]/g, '') // strip numbers from string
     let previousCharCode = null
     let currentCharCode = null
     let counterForSameLetter = 0
