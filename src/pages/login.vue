@@ -3,43 +3,40 @@
     <p>Who dares to open this Pokédex? Are you a trainer?</p>
     <div class="nes-field">
       <label for="name_field">Your name</label>
-      <input v-model="username" type="text" id="name_field" class="nes-input">
+      <input id="name_field" v-model="username" type="text" class="nes-input">
     </div>
     <div class="nes-field">
       <label for="password_field">Password</label>
-      <input v-model="password" type="password" id="password_field" class="nes-input">
+      <input id="password_field" v-model="password" type="password" class="nes-input">
     </div>
-    <a @click="checkPassword" class="nes-btn">Continue</a>
+    <a class="nes-btn" @click="checkPassword">Continue</a>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { validatePassword } from '@/utils/validatePassword'
+import { mapActions } from "vuex";
+import { validatePassword } from "@/utils/validatePassword";
 
-    export default {
-      data: function() {
-        return {
-          username: '',
-          password: '',
-          passwordCorrect: false
-        }
-      },
-      methods: {
-        checkPassword() {
-          this.passwordCorrect = validatePassword(this.password)
-          if (this.passwordCorrect) {
-            this.setUserLoggedIn()
-            this.$router.push('select')
-
-          }
-          return
-        },
-        ...mapActions([
-            'setUserLoggedIn'
-        ])
+export default {
+  data: function() {
+    return {
+      username: "",
+      password: "",
+      passwordCorrect: false
+    };
+  },
+  methods: {
+    checkPassword() {
+      this.passwordCorrect = validatePassword(this.password);
+      if (this.passwordCorrect) {
+        this.setUserLoggedIn();
+        this.$router.push("select");
       }
-    }
+      return;
+    },
+    ...mapActions(["setUserLoggedIn"])
+  }
+};
 </script>
 
 <style scoped>

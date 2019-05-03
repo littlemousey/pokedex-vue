@@ -1,9 +1,14 @@
 <template>
   <div>
-    <h1 class="overview-favorite-pokemon__title">Your favorite Pokémon</h1>
-      <router-link class="nes-btn" to="/select">
-        Go back
-      </router-link>
+    <h1 class="overview-favorite-pokemon__title">
+      Your favorite Pokémon
+    </h1>
+    <router-link
+      class="nes-btn"
+      to="/select"
+    >
+      Go back
+    </router-link>
     <div class="overview-favorite-pokemon">
       <pokemon-card
         v-for="(pokemon, index) in stateFavoritePokemonList"

@@ -1,8 +1,9 @@
 export function validatePassword(password) {
-    const correctLength = checksOnLength();
-    const correctCasing = checkOnLowerCase();
+    const MASTERPASSWORD = 'pokemonmaster'
+    const correctLength = checksOnLength(password)
+    const correctCasing = checkOnLowerCase(password)
 
-    if (correctLength && correctCasing || password === 'master') {
+    if ((correctLength && correctCasing) || password === MASTERPASSWORD) {
         return true
     } else {
         return false
@@ -21,6 +22,14 @@ export function checkOnLowerCase(password) {
     const regex = /[A-Z]/g
     const matchCapitalLetters = password.match(regex)
     if (matchCapitalLetters) {
+        return false
+    } else {
+        return true
+    }
+}
+
+export function checkOnForbiddenLetters(password) {
+    if (password.includes('i')) {
         return false
     } else {
         return true

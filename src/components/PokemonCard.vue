@@ -1,16 +1,24 @@
 <template>
-  <div v-if="pokemonData && pokemonDescription" class="pokemon-card nes-container is-rounded">
+  <div
+    v-if="pokemonData && pokemonDescription"
+    class="pokemon-card nes-container is-rounded"
+  >
     <div class="pokemon-card__image">
-      <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`"
-            :alt="pokemonData.name"/>
+      <img
+        :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonData.id}.png`"
+        :alt="pokemonData.name"
+      >
     </div>
     <div class="pokemon-card__text">
       <p>Name: {{ pokemonData.name }}</p>
       <p>No. {{ pokemonData.id }}</p>
       <p>
-        Type: <span v-for="(typesOfPokemon, index) in pokemonData.types" :key="`type${index}`">
-            {{ typesOfPokemon.type.name }}
-          </span>
+        Type: <span
+          v-for="(typesOfPokemon, index) in pokemonData.types"
+          :key="`type${index}`"
+        >
+          {{ typesOfPokemon.type.name }}
+        </span>
       </p>
       <!-- <p v-for="(property, index) in pokemonData.stats" :key="`property${index}`">
         {{ property.stat.name }}: {{ property.base_stat }}
