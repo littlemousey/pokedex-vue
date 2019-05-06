@@ -3,14 +3,32 @@
     <p>Who dares to open this Pokédex? Are you a trainer?</p>
     <div class="nes-field">
       <label for="name_field">Your name</label>
-      <input id="name_field" v-model="username" type="text" class="nes-input">
+      <input
+        id="name_field"
+        v-model="username"
+        type="text"
+        class="nes-input"
+        @keyup.enter="checkPassword"
+      >
     </div>
     <div class="nes-field">
       <label for="password_field">Password</label>
-      <input id="password_field" v-model="password" type="password" class="nes-input">
+      <input
+        id="password_field"
+        v-model="password"
+        type="password"
+        class="nes-input"
+        @keyup.enter="checkPassword"
+      >
     </div>
-    <a class="nes-btn" @click="checkPassword">Continue</a>
-    <p v-if="showPasswordError" class="nes-text is-error">Oops, that was a wrong password. Try again</p>
+    <a class="nes-btn"
+@click="checkPassword">
+      Continue
+    </a>
+    <p v-if="showPasswordError"
+class="nes-text is-error">
+      Oops, that was a wrong password. Try again
+    </p>
   </div>
 </template>
 
