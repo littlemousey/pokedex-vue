@@ -1,9 +1,18 @@
 # pokedex-vue
 
+A pokedex of the first 151 pokemon (first generation).
+You can select your favorites and lookup their pokedex description.
+
+![Screenshot pokedex](/public/screenshot1.png)
+![Screenshot pokedex](/public/screenshot2.png)
+
+Demo of the [pokedex in Vue](https://stoic-kilby-75508b.netlify.com/)
+
 This project is made with Vue CLI and the following libaries and API:
 - [NES.CSS](https://nostalgic-css.github.io/NES.css/)
 - [Vuex](https://vuex.vuejs.org/)
 - [PokéAPI](https://pokeapi.co/)
+- [Persisted Vuex state](https://github.com/robinvdvleuten/vuex-persistedstate)
 
 ## Project setup
 ```
