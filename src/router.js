@@ -1,15 +1,16 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Favorites from './pages/favorites'
 import Home from './pages/home'
 import Login from './pages/login'
 import store from './store'
 
+// lazy load route
+const Favorites = () => import('./pages/favorites') // eslint-disable-line
+
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/home', component: Home, meta: { requiresAuth: true }},
   { path: '/favorites', component: Favorites, meta: { requiresAuth: true }},
   { path: '/login', component: Login, meta: { requiresAuth: false } },
   { path: '*', component: Home, meta: {requiresAuth: true}}

@@ -5,7 +5,7 @@
     </h1>
     <router-link
       class="nes-btn"
-      to="/home"
+      to="/"
     >
       Go back
     </router-link>

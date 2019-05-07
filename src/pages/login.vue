@@ -54,7 +54,7 @@ export default {
             this.passwordCorrect = validatePassword(this.password)
             if (this.passwordCorrect) {
                 this.setUserLoggedIn()
-                this.$router.push('home')
+                this.$router.push('/')
             } else {
                 this.showPasswordError = true
             }
