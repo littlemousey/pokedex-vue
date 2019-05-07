@@ -1,25 +1,13 @@
 <template>
-  <div>
-    <v-layout
-      align-center
-      justify-center
-      row
-      fill-height
+  <div class="select-pokemon-page">
+    <img
+      src="./../assets/logo.svg"
+      alt="pokémon"
     >
-      <img
-        src="./../assets/logo.svg"
-        alt="pokémon"
-      >
-    </v-layout>
-    <v-layout
-      align-start
-      justify-space-around
-      row
-      fill-height
-    >
+    <div class="select-pokemon-content">
       <pokemon-list v-if="statePokemonDataList" />
       <summary-favorites v-if="statePokemonDataList" />
-    </v-layout>
+    </div>
   </div>
 </template>
 
@@ -52,3 +40,16 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.select-pokemon-page {
+    text-align: center;
+}
+
+.select-pokemon-content {
+    text-align: left;
+    display: flex;
+    justify-content: space-evenly;
+}
+</style>
+
