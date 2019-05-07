@@ -23,9 +23,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (!store.state.loggedIn && to.meta.requiresAuth) {
-    next('/login');
+    next('/login')
+  } else if (store.state.loggedIn && !to.meta.requiresAuth) {
+    next('/')
   } else {
-    next();
+    next()
   }
 })
 
