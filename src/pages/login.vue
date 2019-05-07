@@ -21,12 +21,16 @@
         @keyup.enter="checkPassword"
       >
     </div>
-    <a class="nes-btn"
-@click="checkPassword">
+    <a
+      class="nes-btn"
+      @click="checkPassword"
+    >
       Continue
     </a>
-    <p v-if="showPasswordError"
-class="nes-text is-error">
+    <p
+      v-if="showPasswordError"
+      class="nes-text is-error"
+    >
       Oops, that was a wrong password. Try again
     </p>
   </div>
@@ -50,7 +54,7 @@ export default {
             this.passwordCorrect = validatePassword(this.password)
             if (this.passwordCorrect) {
                 this.setUserLoggedIn()
-                this.$router.push('select')
+                this.$router.push('home')
             } else {
                 this.showPasswordError = true
             }
