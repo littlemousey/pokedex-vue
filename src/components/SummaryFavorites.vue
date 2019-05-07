@@ -11,7 +11,7 @@
     </p>
     <template>
       <p
-        v-for="(pokemonName, index) in stateFavoritePokemonList"
+        v-for="(pokemonName, index) in favorites"
         :key="index"
         class="chosen-pokemon"
       >
@@ -47,21 +47,28 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
     export default {
         name: 'SummaryFavorites',
+        props: {
+          pokemonList: {
+            type: Array,
+            required: true
+          },
+          favorites: {
+            type: Array,
+            required: true
+          }
+        },
         data: function() {
             return {
                 maximumList: 10
             }
         },
-                computed: {
-            ...mapState([
-            'stateFavoritePokemonList', 'statePokemonDataList'
-            ]),
+        computed: {
             favoriteListLength() {
-                return this.stateFavoritePokemonList.length
+                return this.favorites.length
             }
         },
         methods: {
@@ -78,8 +85,8 @@ import { mapState, mapActions } from 'vuex'
 
           },
           pickRandomPokemon() {
-            const list = this.statePokemonDataList.filter(function(pokemon){
-              return !this.stateFavoritePokemonList.includes(pokemon.name)
+            const list = this.pokemonList.filter(function(pokemon){
+              return !this.favorites.includes(pokemon.name)
             }, this)
             
             const number = Math.floor(Math.random() * Math.floor(list.length));

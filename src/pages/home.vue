@@ -5,8 +5,14 @@
       alt="pokémon"
     >
     <div class="select-pokemon-content">
-      <pokemon-list v-if="statePokemonDataList" />
-      <summary-favorites v-if="statePokemonDataList" />
+      <pokemon-list
+        :pokemon-list="statePokemonDataList"
+        :favorites="stateFavoritePokemonList"
+      />
+      <summary-favorites
+        :pokemon-list="statePokemonDataList"
+        :favorites="stateFavoritePokemonList"
+      />
     </div>
   </div>
 </template>
@@ -22,7 +28,7 @@ export default {
         SummaryFavorites,
     },
     computed: {
-        ...mapState(['statePokemonDataList']),
+        ...mapState(['statePokemonDataList', 'stateFavoritePokemonList']),
     },
     async created() {
         const pokemonData = await this.getPokemonData()

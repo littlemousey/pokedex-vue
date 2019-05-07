@@ -2,13 +2,13 @@
   <div class="pokemon-list">
     <h2>Choose your Pokémon</h2>
     <p
-      v-for="(pokemon, index) in statePokemonDataList"
+      v-for="(pokemon, index) in pokemonList"
       :key="pokemon.url"
       class="pokemon-list-item"
     >
       {{ index + 1 + '. ' }}
       <i
-        v-if="stateFavoritePokemonList.includes(pokemon.name)"
+        v-if="favorites.includes(pokemon.name)"
         class="nes-icon is-small heart"
       />
       <i
@@ -25,13 +25,13 @@
         alt="Pokemon`"
       >
       <a
-        v-show="!stateFavoritePokemonList.includes(pokemon.name)"
+        v-show="!favorites.includes(pokemon.name)"
         class="nes-btn"
         :class="{ 'is-disabled': favoriteListLength === 10 }"
         @click="setFavorites(pokemon.name), playPokemonCry(index + 1)"
       >Pick me!</a>
       <button
-        v-show="stateFavoritePokemonList.includes(pokemon.name)"
+        v-show="favorites.includes(pokemon.name)"
         class="nes-btn is-error"
         @click="setFavorites(pokemon.name), playPokemonCry(index + 1)"
       >
@@ -42,20 +42,29 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     name: 'PokemonList',
+    props: {
+        pokemonList: {
+            type: Array,
+            required: true,
+        },
+        favorites: {
+            type: Array,
+            required: true,
+        },
+    },
     computed: {
-        ...mapState(['stateFavoritePokemonList', 'statePokemonDataList']),
         favoriteListLength() {
-            return this.stateFavoritePokemonList.length
+            return this.favorites.length
         },
     },
     methods: {
         setFavorites(name) {
-            if (this.stateFavoritePokemonList.includes(name)) {
-                const indexInArray = this.stateFavoritePokemonList.indexOf(name)
+            if (this.favorites.includes(name)) {
+                const indexInArray = this.favorites.indexOf(name)
                 this.deleteFavorite(indexInArray)
                 return
             }

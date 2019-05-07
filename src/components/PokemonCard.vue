@@ -20,9 +20,6 @@
           {{ typesOfPokemon.type.name }}
         </span>
       </p>
-      <!-- <p v-for="(property, index) in pokemonData.stats" :key="`property${index}`">
-        {{ property.stat.name }}: {{ property.base_stat }}
-      </p> -->
       <p>{{ pokemonDescription[0].flavor_text }}</p>
     </div>
   </div>
