@@ -39,10 +39,6 @@ const store = new Vuex.Store({
     mutations: {
         setUserLoggedIn(state) {
             state.loggedIn = true
-            window.localStorage.setItem(
-                LOCAL_STORAGE_USER,
-                JSON.stringify(state.loggedIn)
-            )
         },
         setPokemonData(state, list) {
             state.statePokemonDataList = list
@@ -52,24 +48,12 @@ const store = new Vuex.Store({
         },
         addFavorite(state, name) {
             state.stateFavoritePokemonList.push(name)
-            window.localStorage.setItem(
-                LOCAL_STORAGE_PKM_NAMES,
-                JSON.stringify(state.stateFavoritePokemonList)
-            )
         },
         deleteFavorite(state, item) {
             state.stateFavoritePokemonList.splice(item, 1)
-            window.localStorage.setItem(
-                LOCAL_STORAGE_PKM_NAMES,
-                JSON.stringify(state.stateFavoritePokemonList)
-            )
         },
         eraseFavoritePokemonList(state) {
             state.stateFavoritePokemonList = []
-            window.localStorage.setItem(
-                LOCAL_STORAGE_PKM_NAMES,
-                JSON.stringify(state.stateFavoritePokemonList)
-            )
         },
     },
 })

@@ -11,7 +11,8 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/home', component: Home, meta: { requiresAuth: true }},
   { path: '/favorites', component: Favorites, meta: { requiresAuth: true }},
-  { path: '/login', component: Login, meta: { requiresAuth: false } }
+  { path: '/login', component: Login, meta: { requiresAuth: false } },
+  { path: '*', component: Home, meta: {requiresAuth: true}}
 ]
 
 const router = new VueRouter({
