@@ -8,10 +8,14 @@
       <pokemon-list
         :pokemon-list="statePokemonDataList"
         :favorites="stateFavoritePokemonList"
+        @deleteFavorite="deleteFavorite"
+        @addFavorite="addFavorite"
       />
       <summary-favorites
         :pokemon-list="statePokemonDataList"
         :favorites="stateFavoritePokemonList"
+        @addFavorite="addFavorite"
+        @eraseFavoritePokemonList="eraseFavoritePokemonList"
       />
     </div>
   </div>
@@ -42,7 +46,7 @@ export default {
             const json = await data.json()
             return json.results
         },
-        ...mapActions(['setPokemonData']),
+        ...mapActions(['setPokemonData', 'addFavorite', 'deleteFavorite', 'eraseFavoritePokemonList']),
     },
 }
 </script>

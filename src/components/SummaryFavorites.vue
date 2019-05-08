@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
     export default {
         name: 'SummaryFavorites',
         props: {
@@ -89,15 +87,12 @@ import { mapActions } from 'vuex'
               return !this.favorites.includes(pokemon.name)
             }, this)
             
-            const number = Math.floor(Math.random() * Math.floor(list.length));
-            this.addFavorite(list[number].name)
+            const number = Math.floor(Math.random() * Math.floor(list.length))
+            this.$emit('addFavorite', list[number].name)
           },
           emptyFavoritePokemonList() {
-            this.eraseFavoritePokemonList()
-          },
-          ...mapActions([
-              'addFavorite', 'eraseFavoritePokemonList'
-          ])
+            this.$emit('eraseFavoritePokemonList')
+          }
         }
     }
 </script>

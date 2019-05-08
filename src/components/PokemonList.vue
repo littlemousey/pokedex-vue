@@ -42,8 +42,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
     name: 'PokemonList',
     props: {
@@ -65,11 +63,11 @@ export default {
         setFavorites(name) {
             if (this.favorites.includes(name)) {
                 const indexInArray = this.favorites.indexOf(name)
-                this.deleteFavorite(indexInArray)
+                this.$emit('deleteFavorite', indexInArray)
                 return
             }
             if (this.favoriteListLength < 10) {
-                this.addFavorite(name)
+                this.$emit('addFavorite', name)
             }
         },
         playPokemonCry(pokemonId) {
@@ -77,8 +75,7 @@ export default {
                 `https://pokemoncries.com/cries-old/${pokemonId}.mp3`
             )
             audio.play()
-        },
-        ...mapActions(['addFavorite', 'deleteFavorite']),
+        }
     },
 }
 </script>
