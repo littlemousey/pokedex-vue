@@ -7,6 +7,7 @@ You can select your favorites and lookup their pokedex description.
 ![Screenshot pokedex](/public/screenshot2.png)
 
 Demo of the [pokedex in Vue](https://stoic-kilby-75508b.netlify.com/)
+The password you can use is `pokemonmaster`. Name doesn't matter for validation.
 
 This project is made with Vue CLI and the following libaries and API:
 - [NES.CSS](https://nostalgic-css.github.io/NES.css/)
