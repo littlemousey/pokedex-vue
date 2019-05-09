@@ -1,7 +1,7 @@
 <template>
   <div class="select-pokemon-page">
     <img
-      src="./../assets/logo.svg"
+      src="./../assets/logo-pixel.gif"
       alt="pokémon"
     >
     <div class="select-pokemon-content">
