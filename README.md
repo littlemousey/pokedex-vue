@@ -2,6 +2,7 @@
 
 A pokedex of the first 151 pokemon (first generation).
 You can select your favorites and lookup their pokedex description.
+There are 3 pages: login page, pokémon selection page and the detail page for the chosen favorite pokémon.
 
 ![Screenshot pokedex](/public/screenshot1.png)
 ![Screenshot pokedex](/public/screenshot2.png)
